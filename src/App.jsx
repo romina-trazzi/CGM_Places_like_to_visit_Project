@@ -62,6 +62,14 @@ function App() {
   //wrappiamo la funzione con useCallback() a cui passeremo comunque una dipendenza
   //usiamo useCallBack per evitare la rivalutazione della funzione (eseguita ad ogni ciclo di rendering)
   //se usiamo una funzione che triggera un cambio di stato come dipendenza all'interno di un useEffect, bisogna wrapparla tramite useCallBack a cui dovremo passare cmq dipendenza vuota
+  
+  /* La funzione handleStaratRemovePlace non verrà ricreata al 
+  caricamento del componente perché React la memorizza.
+  Va sempre dichiarato l'array di dipendenze */
+
+  /* UseCallback si usa con useEffect quando useEffect ha una dipendenza che è una funzione
+  per evitare il loop infinito, per evitare cicli infiniti */
+  
   const handleRemovePlace = useCallback(function handleRemovePlace() {
     setPickedPlaces((prevPickedPlaces) =>
       prevPickedPlaces.filter((place) => place.id !== selectedPlace.current)
